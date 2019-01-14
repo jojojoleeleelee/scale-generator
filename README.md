@@ -1,11 +1,13 @@
 
 
-## S C A L E  G E N E R A T O R
+## S C A L E  ---  G E N E R A T O R
 
 
 An application built with React to generate any key of your choice.
 
 Major, minor and even the obscure scales like locrian, dorian, mixolydian, etc.
+
+***
 
 ### How to use:
 
