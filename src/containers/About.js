@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import logo from '../logo.png';
 
 // import logo from '../lamp-logo.png'
 
@@ -21,6 +22,9 @@ class About extends React.Component {
             <br />
             _______________________________________
             <br />
+            <span>
+              <img src={logo} alt="scale logo"  height="300" />
+            </span>
               <h5 className="brown-text text-lighten-2">
                   <br />Ever wondered how to play a F sharp Mixolydian scale? 
                   <strong>

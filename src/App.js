@@ -6,6 +6,7 @@ import { Footer } from './components/Footer';
 
 import Home from './containers/Home';
 import Generator from './containers/Generator';
+import Random from './containers/Random';
 import About from './containers/About';
 
 
@@ -21,6 +22,7 @@ class App extends Component {
                 <Switch>
                   <Route exact path= '/' component={Home}></Route>
                   <Route exact path= '/generator' component={Generator}></Route>
+                  <Route exact path= '/random' component={Random}></Route>
                   <Route exact path= '/about' component={About}></Route>             
                 </Switch>
               </div>

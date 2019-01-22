@@ -1,4 +1,6 @@
 import React from 'react';
+import Typography from '@material-ui/core/Typography'
+
 export const Footer = () => {
 
   return (
@@ -6,7 +8,7 @@ export const Footer = () => {
       <div className="container">
         <div className="row">
           <div className="col l6 s12">
-            <h5 className="white-text">S C A L E &spades; G E N</h5>
+          <Typography className="gold-text text-lighten-1" variant='display1' >S C A L E &spades; G E N </Typography>
             <p className="grey-text text-lighten-4">Your Virtual Key Generator</p>
             <p className="grey-text left-align text-lighten-4">Generate the scale that you want, whenever you want!</p>
           </div>
