@@ -6,27 +6,40 @@ import { Scale } from '../components/Scale'
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
+var scale = require('music-scale');
 // import logo from '../lamp-logo.png'
 const types = [
   {
     value: 'major',
-    label: 'MAJOR',
+    label: 'Major',
   },
   {
     value: 'minor',
-    label: 'MINOR',
+    label: 'Minor',
   },
   {
     value: 'mixolydian',
-    label: 'MIXOLYDIAN',
+    label: 'Mixolydian',
   },
   {
     value: 'phrygian',
-    label: 'PHRYGIAN',
+    label: 'Phrygian',
   },
   {
     value: 'dorian',
-    label: 'DORIAN',
+    label: 'Dorian',
+  },
+  {
+    value: 'pentatonic',
+    label: 'Pentatonic',
+  },
+  {
+    value: 'lydian',
+    label: 'Lydian',
+  },
+  {
+    value: 'locrian',
+    label: 'Locrian',
   },
 ];
 
@@ -40,12 +53,20 @@ const notes = [
     label: 'C#',
   },
   {
+    value: 'Db',
+    label: 'Db',
+  },
+  {
     value: 'D',
     label: 'D',
   },
   {
     value: 'D#',
     label: 'D#',
+  },
+  {
+    value: 'Eb',
+    label: 'Eb',
   },
   {
     value: 'E',
@@ -56,12 +77,24 @@ const notes = [
     label: 'F',
   },
   {
+    value: 'F#',
+    label: 'F#',
+  },
+  {
+    value: 'Gb',
+    label: 'Gb',
+  },
+  {
     value: 'G',
     label: 'G',
   },
   {
     value: 'G#',
     label: 'G#',
+  },
+  {
+    value: 'Ab',
+    label: 'Ab',
   },
   {
     value: 'A',
@@ -72,23 +105,44 @@ const notes = [
     label: 'A#',
   },
   {
+    value: 'Bb',
+    label: 'Bb',
+  },
+  {
     value: 'B',
     label: 'B',
   },
 ];
 
 class Generator extends React.Component {
-  state = {
-    type: 'major',
-    note: 'C'
-  };
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      scale: [],
+      type: 'major',
+      note: 'C'
+    }
+  }
+  handleOnSubmit = (event) => {
+    alert("You chose the " + this.state.note + " " + this.state.type + " scale!");
+    let generatedScale = scale.get(`${this.state.note} ${this.state.type}`)
+    this.setState(state => ({
+      scale: generatedScale
+    }))
+  }
 
-  handleChange = name => event => {
-    this.setState({
-      [name]: event.target.value,
-    });
-  };
+  handleNoteChange = (event) => {
+    this.setState(state => ({
+      note: event.target.value
+    }))
+  }
+
+  handleTypeChange = (event) => {
+    this.setState(state => ({
+      type: event.target.value
+    }))
+  }
 
   render(){
     return (
@@ -98,19 +152,35 @@ class Generator extends React.Component {
         <br /><br />
         <br />
     
-              <div className="center-align">
+              <div className="center-align ">
              
                 <Typography variant='display2' className='brown-text text-lighten-3 '>S C A L E</Typography ><br/>
                 < br />
                 < br />
+                
+                <TextField
+                  id="select-scale-note"
+                  select
+                  label="Select"
+                  value={this.state.note}
+                  helperText="Please select your starting note"
+                  margin="normal"
+                  onChange={this.handleNoteChange} 
+                >{notes.map(option => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+                </TextField>
+                &nbsp;&nbsp;&nbsp;
                 <TextField
                   id="select-scale-type"
                   select
                   label="Select"
                   value={this.state.type}
-                  onChange={this.handleChange('type')}
                   helperText="Please select your scale type"
                   margin="normal"
+                  onChange={this.handleTypeChange} 
                 >
                 {types.map(option => (
                   <option key={option.value} value={option.value}>
@@ -119,24 +189,11 @@ class Generator extends React.Component {
                 ))}
                 </TextField>
                 <br />
-                <TextField
-                  id="select-scale-note"
-                  select
-                  label="Select"
-                  value={this.state.note}
-                  onChange={this.handleChange('note')}
-                  helperText="Please select your starting note"
-                  margin="normal"
-                >{notes.map(option => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-                </TextField>
                 <br />
-              <Button size='large' color='primary' className="waves-effect waves-light btn" onClick={this.handleOnClick}>G E N E R A T E</Button>
+                <br />
+              <Button size='large' color='primary' className="waves-effect waves-light btn" onClick={this.handleOnSubmit}>G E N E R A T E</Button>
                 <br /><br />
-                {this.props.scale !== undefined ? <Scale scale={this.props.scale} /> : null}
+                {this.state.scale !== undefined || [] ? <Scale scale={this.state.scale} /> : null}
                 <br /><br />
                 <br /><br />
               </div>

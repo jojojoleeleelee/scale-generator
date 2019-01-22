@@ -6,10 +6,27 @@ import { Scale } from '../components/Scale'
 import { loadRandomScale } from '../actions/scales'
 import Button from '@material-ui/core/Button';
 
+var scale = require('music-scale');
+
 class Random extends React.Component {
  
+  constructor(props) {
+    super(props)
+    this.state = {
+      scale: []
+    }
+
+    this.handleOnClick = this.handleOnClick.bind(this)
+  }
   handleOnClick = () => {
-    this.props.loadRandomScale()
+    let scaleArray = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
+    let rand = scaleArray[Math.floor(Math.random() * scaleArray.length)];
+    let randomScale = scale.get(`${rand} major`)
+    console.log(rand)
+    console.log(randomScale)
+    this.setState(state => ({
+      scale: randomScale
+    }))
   }
   render() {
     return (
@@ -21,7 +38,7 @@ class Random extends React.Component {
         < br />
       <Button size='large' color='primary' className="waves-effect waves-light btn" onClick={this.handleOnClick}>R A N D O M</Button>
         <br /><br />
-        {this.props.scale !== undefined ? <Scale scale={this.props.scale} /> : null}
+        {this.state.scale !== undefined ? <Scale scale={this.state.scale} /> : null}
         <br /><br />
         <br /><br />
       </div>

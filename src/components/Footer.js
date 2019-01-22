@@ -13,8 +13,8 @@ export const Footer = () => {
             <p className="grey-text left-align text-lighten-4">Generate the scale that you want, whenever you want!</p>
           </div>
           <div className="col l4 offset-l2 s12">
-            <h5 className="white-text">Links</h5>
-            <ul>
+            <h5 className="white-text right-align">Links</h5>
+            <ul className='right-align'>
               <li><a className="grey-text text-lighten-3" href="/generator">Generator</a></li>
               <li><a className="grey-text text-lighten-3" href='/about'>About</a></li>
             </ul>
